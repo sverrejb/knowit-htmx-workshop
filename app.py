@@ -17,9 +17,9 @@ database = load_json_file("static/fixtures.json")
 def root():
     return render_template('index.html')
 
-@app.route('/members')
-def members():
-    return render_template('members.html')
+@app.route('/employees')
+def employees():
+    return render_template('employees.html', employees = database)
 
 @app.route('/registration')
 def register():
