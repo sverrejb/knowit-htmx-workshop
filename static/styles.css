@@ -8,13 +8,13 @@ body {
     font-family: "XKCD", Verdana, Tahoma;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f1f0ed;
 }
 
 header {
-    background-color: #333;
+    padding-top: 2rem;
+    background-color: #4b6454;
     color: white;
-    padding: 10px 0;
     text-align: center;
 }
 
@@ -29,6 +29,10 @@ nav a {
     color: #333;
     text-decoration: none;
     font-size: 1.2em;
+}
+
+header h1 {
+    margin: 0;
 }
 
 main {
