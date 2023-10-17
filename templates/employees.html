@@ -2,7 +2,11 @@
 
 {% block content %}
 <h2>Employees</h2>
-<p>Here you can search</p>
+<form action="{{ url_for('get_employees') }}" method="GET">
+    <input type="text" name="q" placeholder="Search employees by name" value="{{ query or '' }}">
+    <button type="submit">Search</button>
+  </form>
+  
 
 <table>
     <tr>
@@ -16,9 +20,13 @@
         <td>{{ employee.name }}</td>
         <td>{{ employee.year_of_birth }}</td>
         <td>{{ employee.job }}</td>
+        <td><a href="/employees/{{ employee.id }}">Edit 🖊</a></td>
     </tr>
     {% endfor %}
 </table>
+
+{% if next_page %}
 <a href="{{next_page}}">Next Page</a>
+{% endif %}
 
 {% endblock %}
