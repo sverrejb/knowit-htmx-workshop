@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Employees</h2>
-    <p>Here you can search</p>
+<h2>Employees</h2>
+<p>Here you can search</p>
 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Year of birth</th>
-            <th>Job</th>
-        </tr>
-        
-        {% for employee in employees %}
-        <tr>
-            <td>{{ employee.name }}</td>
-            <td>{{ employee.year_of_birth }}</td>
-            <td>{{ employee.job }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Year of birth</th>
+        <th>Job</th>
+    </tr>
+
+    {% for employee in employees %}
+    <tr>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.year_of_birth }}</td>
+        <td>{{ employee.job }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{next_page}}">Next Page</a>
+
 {% endblock %}
