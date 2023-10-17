@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Register</h2>
-    <p>Here you can register.</p>
+<h2>Register new employee</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.name.label }} {{ form.name() }}
+    </div>
+    <div>
+        {{ form.year_of_birth.label }} {{ form.year_of_birth() }}
+    </div>
+    <div>
+        {{ form.job.label }} {{ form.job() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
 {% endblock %}

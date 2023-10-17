@@ -49,3 +49,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+tr:nth-child(even) {
+    background-color: #8f8f8f;
+}
