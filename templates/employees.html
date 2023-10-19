@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Employees</h2>
+<h2>Employees ({{ number_of_employees }})</h2>
 <form action="{{ url_for('get_employees') }}" method="GET">
     <input type="text" name="q" placeholder="Search employees by name" value="{{ query or '' }}">
     <button type="submit">Search</button>

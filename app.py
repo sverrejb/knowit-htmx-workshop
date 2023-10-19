@@ -2,8 +2,8 @@ from flask import Flask, redirect, request, render_template, render_template_str
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import DataRequired
-import os
 import json
+import random
 
 app = Flask(__name__)
 
@@ -18,6 +18,7 @@ def load_json_file(file_path):
 
 
 database = load_json_file("static/fixtures.json")
+quotes = [line.strip() for line in open('static/quotes.txt', 'r')]
 
 
 class RegistrationForm(FlaskForm):
@@ -35,7 +36,8 @@ class EditForm(FlaskForm):
 
 @app.route('/')
 def root():
-    return render_template('index.html')
+    quote = random.choice(quotes)
+    return render_template('index.html', quote = quote)
 
 
 @app.route('/employees', methods=['POST'])
@@ -66,7 +68,7 @@ def get_employees():
     if end >= len(employees):
         next_page = None
 
-    return render_template('employees.html', employees=employees[start:end], query=search_query, next_page=next_page)
+    return render_template('employees.html', employees=employees[start:end], query=search_query, next_page=next_page, number_of_employees=len(employees))
 
 
 @app.route('/employees/<int:id>')
