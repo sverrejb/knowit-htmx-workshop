@@ -6,10 +6,14 @@
 
 <form action="{{ url_for('update_employee', id=employee.id) }}" method="POST">
     {{ form.hidden_tag() }}
-    {{ form.name(value=employee.name) }}
-    {{ form.job(value=employee.job) }}
-    {{ form.submit() }}
-    </form>
+    <table>
+        <tr>
+            <td>{{ form.name(value=employee.name) }}</td>
+            <td>{{ form.job(value=employee.job) }}</td>
+            <td>{{ form.submit() }}</td>
+        </tr>
+    </table>
+</form>
 
 
 {% endblock %}
