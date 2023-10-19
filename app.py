@@ -92,6 +92,13 @@ def update_employee(id):
 
     return render_template_string('PageNotFound {{ errorCode }}', errorCode='404'), 404
 
+@app.route('/employees/<int:id>', methods=["DELETE"])
+def delete_employee(id):
+    for employee in database:
+        if employee["id"] == id:
+            del employee
+            return ('', 204)
+    return ('', 500)
 
 @app.route('/registration', methods=['GET'])
 def register():
