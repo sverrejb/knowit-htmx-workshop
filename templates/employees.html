@@ -5,8 +5,8 @@
 <form action="{{ url_for('get_employees') }}" method="GET">
     <input type="text" name="q" placeholder="Search employees by name" value="{{ query or '' }}">
     <button type="submit">Search</button>
-  </form>
-  
+</form>
+
 
 <table>
     <tr>
@@ -21,7 +21,7 @@
         <td>{{ employee.year_of_birth }}</td>
         <td>{{ employee.job }}</td>
         <td><a href="/employees/{{ employee.id }}">Edit 🖊</a></td>
-
+        <td><button class="delete_button" onclick="deleteUser({{ employee.id }})">Delete</button></td>
     </tr>
     {% endfor %}
 </table>
@@ -29,5 +29,26 @@
 {% if next_page %}
 <a href="{{next_page}}">Next Page</a>
 {% endif %}
+
+{# TODO: delete this javascript #}
+<script>
+    function deleteUser(id) {
+        const element = event.target;
+        const tableRow = element.parentElement.parentElement;
+
+        fetch(`/employees/${id}`, { method: 'DELETE' })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Status Code Error: ${res.status}`);
+                }
+            })
+            .then((data) => {
+                tableRow.remove();
+            })
+            .catch((error) => {
+                alert('There was an error. Please try again later.')
+            });
+    }
+</script>
 
 {% endblock %}

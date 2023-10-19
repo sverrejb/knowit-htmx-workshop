@@ -15,16 +15,4 @@
     </table>
 </form>
 
-<h2>Delete employee</h2>
-<button id="delete" onclick="deleteUser()">Delete user!</button>
-
-
-<script>
-function deleteUser() {
-    const element = document.querySelector('#delete');
-    fetch("{{ url_for('update_employee', id=employee.id) }}", { method: 'DELETE' })
-    .then(() => element.innerHTML = 'Delete successful');
-}
-</script>
-
 {% endblock %}

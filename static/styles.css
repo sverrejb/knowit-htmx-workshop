@@ -3,19 +3,22 @@
     src: url(xkcd-script.ttf) format("truetype");
 }
 
-
-body {
-    font-family: "XKCD", Verdana, Tahoma;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f0ed;
-}
-
 header {
     padding-top: 2rem;
     background-color: #4b6454;
     color: white;
     text-align: center;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "XKCD", Verdana, Tahoma;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f0ed;
 }
 
 nav {
@@ -36,20 +39,33 @@ header h1 {
 }
 
 main {
+    flex: 1 0 auto;
     margin: 0 auto;
     max-width: 70%;
 }
 
 footer {
+    flex-shrink: 0;
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    margin-top: 3rem;
 }
 
-tr:nth-child(even) {
-    background-color: #8f8f8f;
+table tr:nth-child(even) {
+    background: #8f8f8f;
+}
+
+.delete_button {
+    padding: 5px 10px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+.delete_button:hover {
+    background-color: #cc0000;
 }

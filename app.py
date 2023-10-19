@@ -81,7 +81,6 @@ def get_employee(id):
 @app.route('/employees/<int:id>', methods=["POST"])
 def update_employee(id):
     form = EditForm()
-    print("yo")
 
     if form.validate_on_submit():
         for employee in database:
@@ -92,13 +91,15 @@ def update_employee(id):
 
     return render_template_string('PageNotFound {{ errorCode }}', errorCode='404'), 404
 
-@app.route('/employees/<int:id>', methods=["DELETE"])
+
+@app.route('/employees/<int:id>', methods=["POST", "DELETE"])
 def delete_employee(id):
     for employee in database:
         if employee["id"] == id:
-            del employee
+            database.remove(employee)
             return ('', 204)
     return ('', 500)
+
 
 @app.route('/registration', methods=['GET'])
 def register():
