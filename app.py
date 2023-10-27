@@ -37,7 +37,7 @@ class EditForm(FlaskForm):
 @app.route('/')
 def root():
     quote = random.choice(quotes)
-    return render_template('index.html', quote = quote)
+    return render_template('index.html', quote=quote)
 
 
 @app.route('/employees', methods=['POST'])
@@ -99,7 +99,7 @@ def delete_employee(id):
     for employee in database:
         if employee["id"] == id:
             database.remove(employee)
-            return ('', 204)
+            return ('', 200)
     return ('', 500)
 
 
