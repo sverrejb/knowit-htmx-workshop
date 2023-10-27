@@ -37,17 +37,10 @@
         const tableRow = element.parentElement.parentElement;
 
         fetch(`/employees/${id}`, { method: 'DELETE' })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`Status Code Error: ${res.status}`);
-                }
-            })
             .then((data) => {
                 tableRow.remove();
             })
-            .catch((error) => {
-                alert('There was an error. Please try again later.')
-            });
+
     }
 </script>
 
