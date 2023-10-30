@@ -1,6 +1,84 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Inspirational message:</h2>
-    <p>{{ quote }}</p>
+<h1>Kurs i HTMX med Knowit</h1>
+<p>Hei! I dette kurset skal vi lære litt om HTMX ved å modernisere en traust og gammeldags multi-page app. Denne
+    nettsiden er implmenetert med Python og Flask, men dette er ikke viktig. Alle språk og rammeverk som kan returnere
+    HTML fungerer med HTMX (så i praksis nesten alle).
+</p>
+
+<h2>Kodebasen</h2>
+<p>I kodebasen (repoet) finner du:</p>
+<ul>
+    <li>📄 app.py - I denne fila ligger all "backendkoden" implementert i Flask. Du må gjerne ta en titt, men du trenger
+        ikke endre noe her.
+    </li>
+    <li>📁 Templates - her finner du alle HTML-malene som flask-koden syr sammen og serverer. <b>Det er primært her vi
+            skal jobbe.</b></li>
+    <li>📁 Static - her finner du statiske filer som favicon, CSS osv. Du trenger neppe å bry deg med denne.</li>
+</ul>
+
+<h2>Oppgaver
+</h2>
+<p>Noen av oppgavene har hint. Prøv å løse de uten først, men det er ingen skam i å få litt hjelp.</p>
+<h3>Oppgave 0: Hello, world!</h3>
+<ul>
+    <li>Gjør deg litt kjent med kodebasen. Utforsk static-mappa og nettsiden, se om du kan finne ut hvordan ting henger
+        sammen. Prøv å registrere, slette og redigere en ansatt.</li>
+    <li>
+        Skum raskt over <a target="_blank" href="https://htmx.org/reference/">https://htmx.org/reference/</a>. Du
+        trenger ikke pugge
+        noe, bare få et raskt overblikk over litt av det som finnest her. (Du vil nok ha denne nettsiden oppe i en fane
+        resten av kurset.)
+    </li>
+</ul>
+</p>
+
+<h3>Oppgave 1: Installer HTMX</h3>
+<p>HTMX er et JavaScript-bibliotek implementet i en enkeltstående fil. Denne må inkluderes i kodebasen vår. Se gjerne på
+    dokumentasjonen til HTMX for hvordan.</p>
+<details>
+    <summary>Hint 1:</summary>
+    Du må finne en plass i koden å installere HTMX slik at det inkluderes på alle sidene (Home, Registration,
+    Employees).
+
+    <details>
+        <summary>Hint 2:</summary>
+        base.html inneholder HTML som inkluderes på alle undersidene.
+
+        <details>
+            <summary>Hint 3:</summary>
+            Lim inn følgende i &lt;head&gt;-taggen:
+            <pre>&lt;script src=&quot;https://unpkg.com/htmx.org@1.9.6&quot;
+                integrity=&quot;sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni&quot;
+                crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</pre>
+
+        </details>
+    </details>
+
+</details>
+
+<h3>Oppgave 2 - Smud navigasjon</h3>
+<p>Om du hopper mellom undersidene kan du av og til se glimt av "FOUC", flash of unstyled content. Dette er jo ikke noe
+    man forventer av en nettside i 2023! Konsulter dokumentasjonen og se etter ett HTMX-attributt som kan hjelpe med
+    dette.</p>
+<details>
+    <summary>Hint 1:</summary>
+    Attributten du leter etter er <a target="_blank" href="https://htmx.org/attributes/hx-boost/">hx-boost</a>.
+
+    <details>
+        <summary>Hint 2:</summary>
+        hx-boost vil få linker og skjema (a-tagger og form-tagger) til å automatisk fungere på en moderne måte.
+
+        <details>
+            <summary>Hint 3:</summary>
+            hx-boost arves av alle barnelement under elementet det settes på.
+        </details>
+    </details>
+</details>
+
+h3
+
+<h2>Inspirational message:</h2>
+<p>{{ quote }}</p>
 {% endblock %}
