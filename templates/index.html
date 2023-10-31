@@ -80,8 +80,21 @@
 <h3>Oppgave 3 - Automatiske sitater</h3>
 <p>Observer sitatet i bunnen av denne siden. Hver gang du laster siden får du (sannsynligvis) et nytt sitat. Vi ønsker
     at det skal lastes inn nye sitat automatisk, hvert 3. sekund. </p>
-    <p>Legg til HTMX-attributter for å laste inn,</p>
 
-<h2>Inspirerende(?) sitat:</h2>
-<p>{{ quote }}</p>
+<details>
+    <summary>Hint 1:</summary>
+    Legg til attributter for å trigge innlasting, hente inn siden og velge ut hvilken del som skal byttes ut.
+
+    <details>
+        <summary>Hint 2:</summary>
+        hx-trigger, hx-get og hx-select er vennene dine :)
+
+        <details>
+            <summary>Hint 3:</summary>
+            <pre>hx-trigger="every 5s" hx-get="/" hx-select="#quote"</pre>
+        </details>
+    </details>
+</details>
+
+<p id="quote" hx-trigger="every 5s" hx-get="/" hx-select="#quote">{{ quote }}</p>
 {% endblock %}

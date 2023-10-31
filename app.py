@@ -36,8 +36,13 @@ class EditForm(FlaskForm):
 
 @app.route('/')
 def root():
+    return render_template('index.html')
+
+
+@app.route('/quote')
+def quote():
     quote = random.choice(quotes)
-    return render_template('index.html', quote=quote)
+    return render_template('quote.html', quote=quote)
 
 
 @app.route('/employees', methods=['POST'])
