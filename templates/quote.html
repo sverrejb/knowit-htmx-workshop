@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Motivational(?) quote:</h2>
-<p id="quote" hx-trigger="every 5s" hx-get="/" hx-select="#quote">{{ quote }}</p>
+<h2>Random quote:</h2>
+<p id="quote">{{ quote }}</p>
 {% endblock %}

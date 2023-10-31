@@ -53,7 +53,7 @@ def register_employee():
         year_of_birth = form.year_of_birth.data
         job = form.job.data
         database.insert(0,
-                        {"id": len(database) + 1, "name": name, "year_of_birth": year_of_birth, "job": job})
+                        {"id": random.randint(len(database), 9999), "name": name, "year_of_birth": year_of_birth, "job": job})
     return render_template('employee_registred.html', name=name)
 
 

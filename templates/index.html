@@ -3,8 +3,10 @@
 {% block content %}
 <h1>Kurs i HTMX med Knowit</h1>
 <p>Hei! I dette kurset skal vi lære litt om HTMX ved å modernisere en traust og gammeldags multi-page app. Denne
-    nettsiden er implmenetert med Python og Flask, men dette er ikke viktig. Alle språk og rammeverk som kan returnere
-    HTML fungerer med HTMX (så i praksis nesten alle).
+    nettsiden er implmenetert med Python og Flask, men dette er ikke viktig. <b>
+        Alle språk og rammeverk som kan returnere
+        HTML fungerer med HTMX
+    </b> (så i praksis nesten alle).
 </p>
 
 <h2>Kodebasen</h2>
@@ -18,9 +20,37 @@
     <li>📁 Static - her finner du statiske filer som favicon, CSS osv. Du trenger neppe å bry deg med denne.</li>
 </ul>
 
+
+
+
+
+
+
+
+
+
+
+
+{# ---------------- SPOILERS!-------------------- #}
+{# Under her ligger hintene for oppgavene i klartekst. Stopp her om du ikke vil spoiles.#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h2>Oppgaver
 </h2>
-<p>Noen av oppgavene har hint. Prøv å løse de uten først, men det er ingen skam i å få litt hjelp.</p>
+<p>Oppgavene har hint. Prøv å løse de uten først, men det er ingen skam i å få litt hjelp!</p>
 <h3>Oppgave 0: Hello, world!</h3>
 <ul>
     <li>Gjør deg litt kjent med kodebasen. Utforsk static-mappa og nettsiden, se om du kan finne ut hvordan ting henger
@@ -33,6 +63,8 @@
     </li>
 </ul>
 </p>
+
+<hr>
 
 <h3>Oppgave 1: Installer HTMX</h3>
 <p>HTMX er et JavaScript-bibliotek implementet i en enkeltstående fil. Denne må inkluderes i kodebasen vår. Se gjerne på
@@ -55,8 +87,9 @@
 
         </details>
     </details>
-
 </details>
+
+<hr>
 
 <h3>Oppgave 2 - Smud navigasjon</h3>
 <p>Om du hopper mellom undersidene kan du av og til se glimt av "FOUC", flash of unstyled content. Dette er jo ikke noe
@@ -77,9 +110,11 @@
     </details>
 </details>
 
+<hr>
+
 <h3>Oppgave 3 - Automatiske sitater</h3>
-<p>Observer sitatet i bunnen av denne siden. Hver gang du laster siden får du (sannsynligvis) et nytt sitat. Vi ønsker
-    at det skal lastes inn nye sitat automatisk, hvert 3. sekund. </p>
+<p>Observer sitatet i på "quote"-sida. Hver gang du laster sida får du (sannsynligvis) et nytt sitat. Vi ønsker
+    at det skal lastes inn nye sitat automatisk hvert 3. sekund. Løs dette med HTMX! </p>
 
 <details>
     <summary>Hint 1:</summary>
@@ -91,10 +126,78 @@
 
         <details>
             <summary>Hint 3:</summary>
-            <pre>hx-trigger="every 5s" hx-get="/" hx-select="#quote"</pre>
+            <pre>hx-trigger="every 3s" hx-get="/" hx-select="#quote"</pre>
         </details>
     </details>
 </details>
 
-<p id="quote" hx-trigger="every 5s" hx-get="/" hx-select="#quote">{{ quote }}</p>
+<hr>
+
+<h3>Oppgave 4 - Innsending av skjema</h3>
+<p>Legg merke til at når du fyller ut registreringsskjemaet blir du sendt videre til en side som bekrefter
+    registreringen. Dette er jo litt tungvint! Hva om vi kunne vise bekreftelsen på samme side som skjemaet? Det kan vi,
+    med HTMX!</p>
+<details>
+    <summary>Hint 1:</summary>
+    Når skjemaet sendes inn, hent den returnerte HTMLen og sett inn deler av den på en passende plass. Det er
+    <pre>employee_registred.html</pre>-malen som blir returnert.
+
+    <details>
+        <summary>Hint 2:</summary>
+        Med mindre du spesifiserer noe annet bruker HTMX
+        <pre>action</pre>- og
+        <pre>method</pre>-attributtene som allerede er definert på skjemaet.
+
+
+        <details>
+            <summary>Hint 3:</summary>
+            Bruk
+            <pre>hx-select</pre> til å velge div'en som har
+            <pre>id="confirmation"</pre>
+        </details>
+    </details>
+</details>
+
+<hr>
+
+<h3>Oppgave 5 - Infiniscroll</h3>
+<p>Listen over ansatte viser kun de 20 første i lista, med en "mer" link nederst som henter neste side. Dette kan vi jo
+    gjøre bedre! Finn en måte å dynamiske hente inn neste del av tabellen etter hvert som man scroller nedover siden.
+</p>
+
+<details>
+    <summary>Hint 1:</summary>
+    Her trenger vi å finne ut av:
+
+    <ul>
+        <li>En trigger, og hvilket element denne skal ligge på</li>
+        <li>Hvordan GET'e URLen til neste side</li>
+        <li>Hvordan hente ut neste del av tabellen, men ikke overskriftene</li>
+        <li>Hvordan plassere nest</li>
+    </ul>
+
+    <details>
+        <summary>Hint 2:</summary>
+        Du kan betinget rendre html i templaten med if-statements:
+        <pre style="display: block;">
+            {% raw %}
+            {% if loop.last and next_page %}
+                &lt;tr class=&quot;foo&quot;&gt;
+            {% else %}
+                &lt;tr&gt;
+            {% endif %}
+            {% endraw %}
+        </pre>
+
+        <p>For å sjekke om du er på siste element i en loop, bruk
+        <pre>{% raw %}{% if loop.last%}{% endraw %}</pre>
+        </p>
+        <details>
+            <summary>Hint 3:</summary>
+            <a href="https://htmx.org/examples/infinite-scroll/">Se eksempel her</a>
+        </details>
+    </details>
+</details>
+
+
 {% endblock %}
