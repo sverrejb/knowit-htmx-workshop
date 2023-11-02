@@ -25,8 +25,10 @@
         <td>{{ employee.name }}</td>
         <td>{{ employee.year_of_birth }}</td>
         <td>{{ employee.job }}</td>
-        <td><a href="/employees/{{ employee.id }}">Edit 🖊</a></td>
-        <td><button class="delete_button" onclick="deleteUser('{{ employee.id }}')">Delete</button></td>
+        <td><a hx-get="/employees/{{ employee.id }}" hx-select="#edit-row" hx-swap="outerHTML"
+                href="/employees/{{ employee.id }}">Edit 🖊</a></td>
+        <td><button hx-delete="/employees/{{ employee.id }}" hx-swap="delete swap:0.6s" hx-target="closest tr"
+                hx-select-oob="#counter" class="delete_button">Delete</button></td>
     </tr>
     {% endfor %}
 </table>
@@ -35,18 +37,6 @@
 <a href="{{next_page}}">Next Page</a>
 {% endif %}
 
-{# TODO: delete this javascript #}
-<script>
-    function deleteUser(id) {
-        const element = event.target;
-        const tableRow = element.parentElement.parentElement;
 
-        fetch(`/employees/${id}`, { method: 'DELETE' })
-            .then((data) => {
-                tableRow.remove();
-            })
-
-    }
-</script>
 
 {% endblock %}
