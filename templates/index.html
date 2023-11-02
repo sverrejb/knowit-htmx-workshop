@@ -18,7 +18,8 @@
             skal jobbe.</b>
         <ul>
             <li>
-                <pre>📄 index.html</pre> er <i>denne siden</i> du leser nå. Unngå å åpne den om du ikke vil spoile alle
+                <code>📄 index.html</code> er <i>denne siden</i> du leser nå. Unngå å åpne den om du ikke vil spoile
+                alle
                 hintene.
             </li>
         </ul>
@@ -87,9 +88,9 @@
         <details>
             <summary>Hint 3:</summary>
             Lim inn følgende i &lt;head&gt;-taggen:
-            <pre>&lt;script src=&quot;https://unpkg.com/htmx.org@1.9.6&quot;
+            <code>&lt;script src=&quot;https://unpkg.com/htmx.org@1.9.6&quot;
                 integrity=&quot;sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni&quot;
-                crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</pre>
+                crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code>
 
         </details>
     </details>
@@ -133,7 +134,7 @@
 
         <details>
             <summary>Hint 3:</summary>
-            <pre>hx-trigger="every 3s" hx-get="/" hx-select="#quote"</pre>
+            <code>hx-trigger="every 3s" hx-get="/" hx-select="#quote"</code>
         </details>
     </details>
 </details>
@@ -147,20 +148,19 @@
 <details>
     <summary>Hint 1:</summary>
     Når skjemaet sendes inn, hent den returnerte HTMLen og sett inn deler av den på en passende plass. Det er
-    <pre>employee_registred.html</pre>-malen som blir returnert.
+    <code>employee_registred.html</code>-malen som blir returnert.
 
     <details>
         <summary>Hint 2:</summary>
         Med mindre du spesifiserer noe annet bruker HTMX
-        <pre>action</pre>- og
-        <pre>method</pre>-attributtene som allerede er definert på skjemaet.
+        <code>action</code>- og
+        <code>method</code>-attributtene som allerede er definert på skjemaet.
 
 
         <details>
             <summary>Hint 3:</summary>
-            Bruk
-            <pre>hx-select</pre> til å velge div'en som har
-            <pre>id="confirmation"</pre>
+            Bruk<code>hx-select</code> til å velge div'en som har<code>id="confirmation"</code> (obs: hx-select tar
+            CSS-selectorer!)
         </details>
     </details>
 </details>
@@ -194,10 +194,10 @@
                 &lt;tr&gt;
             {% endif %}
             {% endraw %}
-        </pre>
+        </code>
 
         <p>For å sjekke om du er på siste element i en loop, bruk
-        <pre>{% raw %}{% if loop.last%}{% endraw %}</pre>
+        <code>{% raw %}{% if loop.last%}{% endraw %}</code>
         </p>
         <details>
             <summary>Hint 3:</summary>
@@ -209,39 +209,47 @@
 <hr>
 
 <h3>Oppgave 6 - Live søking</h3>
-<p>Bla bla</p>
+<p>Om du søker i ansattlista blir du tatt til en ny side med søkeresultatene dine. Dette er greit nok, men det hadde jo
+    vert mye kulere om lista oppdaterte seg etter hvert som vi skriver! Finn en måte å dynamisk laste inn søkeresultatet
+    etter hvert som du skriver i søkefeltet ved hjelp av HTMX!</p>
 <details>
     <summary>Hint 1:</summary>
-    Her trenger vi å finne ut av:
 
-    <ul>
-        <li>En trigger, og hvilket element denne skal ligge på</li>
-        <li>Hvordan GET'e URLen til neste side</li>
-        <li>Hvordan hente ut tabellen fra neste side, men ikke overskriftene</li>
-        <li>Hvordan plassere neste del av lista under den foregående.</li>
-    </ul>
+    <p>Query-parameteret <code>?q=</code> sendes med videre automatisk når vi søker (se i URL-baren når du har søkt).</p>
+    <p>
+    <code>hx-trigger="keyup changed"</code> vil trigge så snart vi skriver, men det er bedre om vi finner en måte å vente
+    litt til vi er ferdige å skrive, så vi ikke spammer backenden med hvert eneste tastetrykk (såkalt
+    <i>debouncing</i>)</p>
 
     <details>
         <summary>Hint 2:</summary>
-        Du kan betinget rendre html i templaten med if-statements:
-        <pre style="display: block;">
-            {% raw %}
-            {% if 1===1 %}
-                &lt;tr class=&quot;foo&quot;&gt;
-            {% else %}
-                &lt;tr&gt;
-            {% endif %}
-            {% endraw %}
-        </pre>
-
-        <p>For å sjekke om du er på siste element i en loop, bruk
-        <pre>{% raw %}{% if loop.last%}{% endraw %}</pre>
-        </p>
+        <code>delay:0.3s</code> 
         <details>
             <summary>Hint 3:</summary>
-            <a href="https://htmx.org/examples/infinite-scroll/">Se eksempel her</a>
+            <code>hx-trigger, hx-get, hx-select,</code> og <code> hx-target</code> burde få deg i mål.
         </details>
     </details>
 </details>
+
+<h3>Bonusoppgave!</h3>
+<p>Finner du en måte å få antall resultater til å også oppdatere seg dynamisk?</p>
+<details>
+    <summary>Hint</summary>
+    Det vi ser etter her er en såkalt<i> <b>O</b>ut-<b>O</b>f-<b>B</b>and</i>-operasjon.
+</details>
+
+<hr>
+
+Oppgave 7 - Innlasting av redigeringsfelt
+<hr>
+Oppgave 8 - Sletting uten javascript
+<hr>
+<h3>Bonus 1 - Dank memes (enkel)</h3>
+<a target="_blank" href="https://htmx.org/essays/#memes">Les memes.</a>
+<p>Essayene på toppen er også ganske bra, da.</p>
+
+<hr>
+<h3>Bonus 2 - Deploy til fly.io (litt avansert)</h3>
+<p>En nettside er bare nyttig om andre kan se den! Ved å følge <a target="_blank" href="https://fly.io/docs/languages-and-frameworks/python/#before-deployment">guiden til fly.io</a> fra og med "Before Deployment"-steget kan du enkelt publisere appen på nettet!</p>
 
 {% endblock %}
