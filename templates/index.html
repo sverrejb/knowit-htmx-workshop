@@ -57,7 +57,7 @@
 
 <h2>Oppgaver
 </h2>
-<p>Oppgavene har hint. Prøv å løse de uten først, men det er ingen skam i å få litt hjelp!</p>
+<p>Noen av oppgavene har hint. Prøv å løse de uten først, men det er ingen skam i å få litt hjelp!</p>
 <h3>Oppgave 0: Hello, world!</h3>
 <ul>
     <li>Gjør deg litt kjent med kodebasen. Utforsk static-mappa og nettsiden, se om du kan finne ut hvordan ting henger
@@ -231,7 +231,7 @@
     </details>
 </details>
 
-<h3>Bonusoppgave!</h3>
+<h3>Ekstraoppgave!</h3>
 <p>Finner du en måte å få antall resultater til å også oppdatere seg dynamisk?</p>
 <details>
     <summary>Hint</summary>
@@ -240,9 +240,19 @@
 
 <hr>
 
-Oppgave 7 - Innlasting av redigeringsfelt
+<h3>Oppgave 7 - Innlasting av redigeringsfelt</h3>
+<p>Når vi redigerer en ansatt blir vi tatt til et skjema på en egen side. En mer elegant løsning er å vise redigeringsfeltet i tabellraden når du trykker på linken. Legg til attributtene som må til for å få til dette.</p>
 <hr>
-Oppgave 8 - Sletting uten javascript
+<h3>Oppgave 8 - Sletting uten javascript</h3>
+<p>Sletting av ansatte er implementert med JavaScript! Dette fordi det å sende DELETE-requests med HTML ikke går an! Takk og pris for at det finnest bedre måter. Slett all javascriptkoden i <code>employees.html</code> og vis hvor enkelt sletting kan gjøres med HTMX!</p>
+
+<h4>Ekstraoppgave!</h4>
+Nederst i (den smått rotete) <code>static/styles.css</code> ser du at vi har lagt til en animasjon på <code>tr</code>-elementer med <code>htmx-swapping</code>-klassen. Denne klassen settes automatisk på alle elementer rett før de blir byttet ut av HTMX. Men siden slettingen går fort, forsvinner elementet før animasjonen rekker å vises. Finn en måte å forsinke fjerningen på like lenge som animasjonen er satt til (0.6 sek).
+
+<details><summary>Hint</summary>
+hx-swap
+</details>
+
 <hr>
 <h3>Bonus 1 - Dank memes (enkel)</h3>
 <a target="_blank" href="https://htmx.org/essays/#memes">Les memes.</a>
