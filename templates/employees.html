@@ -3,7 +3,9 @@
 {% block content %}
 <h2>Employees <span id="counter">({{ number_of_employees }})</span></h2>
 <form action="/employees" method="GET">
-    <input type="text" name="q" placeholder="Search employees by name" value="{{ query or '' }}">
+    <input hx-trigger="keyup changed delay:0.2s" hx-get="/employees" hx-select="#employee-table"
+        hx-target="#employee-table" type="text" name="q" placeholder="Search employees by name" hx-select-oob="#counter"
+        value="{{ query or '' }}">
     <button type="submit">Search</button>
 </form>
 
@@ -15,7 +17,11 @@
     </tr>
 
     {% for employee in employees %}
+    {% if loop.last and next_page %}
+    <tr hx-trigger="revealed" hx-get="{{next_page}}" hx-select="tr:not(:first-child)" hx-swap="afterend">
+        {% else %}
     <tr>
+        {% endif %}
         <td>{{ employee.name }}</td>
         <td>{{ employee.year_of_birth }}</td>
         <td>{{ employee.job }}</td>

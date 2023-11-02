@@ -2,5 +2,5 @@
 
 {% block content %}
 <h2>Random quote:</h2>
-<p id="quote">{{ quote }}</p>
+<p id="quote" hx-trigger="every 3s" hx-get="/quote" hx-select="#quote">{{ quote }}</p>
 {% endblock %}
