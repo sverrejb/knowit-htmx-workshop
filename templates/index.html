@@ -1,6 +1,265 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Inspirational message:</h2>
-    <p>{{ quote }}</p>
+<h1>Kurs i HTMX med Knowit</h1>
+<p>Hei! I dette kurset skal vi lære litt om HTMX ved å vise hvordan det kan utvide en klassisk multi-page app til å
+    ha en moderne brukeropplevelse. Akkurat denne
+    nettsiden er implmenetert med Python og Flask, men dette er ikke viktig! <b>Alle språk og rammeverk som kan
+        returnere HTML fungerer med HTMX</b> (så i praksis nesten alle).
+</p>
+
+<h2>Kodebasen</h2>
+<p>I kodebasen (repoet) finner du:</p>
+<ul>
+    <li>📄 app.py - I denne fila ligger all "backendkoden" implementert i Flask. Du må gjerne ta en titt, men du trenger
+        ikke endre noe her.
+    </li>
+    <li>📁 Templates - her finner du alle HTML-malene som Flask-koden syr sammen og serverer. <b>Det er primært her vi
+            skal jobbe.</b>
+        <ul>
+            <li>
+                <code>📄 index.html</code> er <i>denne siden</i> du leser nå. Unngå å åpne den om du ikke vil spoile
+                alle
+                hintene.
+            </li>
+        </ul>
+    </li>
+    <li>📁 Static - her finner du statiske filer som favicon, CSS osv. Du trenger neppe å bry deg med denne.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+{# ---------------- SPOILERS!-------------------- #}
+{# Under her ligger hintene for oppgavene i klartekst. Stopp her om du ikke vil spoiles.#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Oppgaver
+</h2>
+<p>Noen av oppgavene har hint. Prøv å løse de uten først, men det er ingen skam i å få litt hjelp!</p>
+<h3>Oppgave 0: Hello, world!</h3>
+<ul>
+    <li>Gjør deg litt kjent med kodebasen. Utforsk static-mappa og nettsiden, se om du kan finne ut hvordan ting henger
+        sammen. Prøv å registrere, slette og redigere en ansatt.</li>
+    <li>
+        Skum raskt over <a target="_blank" href="https://htmx.org/reference/">https://htmx.org/reference/</a>. Du
+        trenger ikke pugge
+        noe, bare få et raskt overblikk over litt av det som finnest her. (Du vil nok ha denne nettsiden oppe i en fane
+        resten av kurset.)
+    </li>
+</ul>
+</p>
+
+<hr>
+
+<h3>Oppgave 1: Installer HTMX</h3>
+<p>HTMX er et JavaScript-bibliotek implementet i en enkeltstående fil. Denne må inkluderes i kodebasen vår. Se gjerne på
+    dokumentasjonen til HTMX for hvordan.</p>
+<details>
+    <summary>Hint 1:</summary>
+    Du må finne en plass i koden å installere HTMX slik at det inkluderes på alle sidene (Home, Registration,
+    Employees, Quote).
+
+    <details>
+        <summary>Hint 2:</summary>
+        base.html inneholder HTML som inkluderes på alle undersidene.
+
+        <details>
+            <summary>Hint 3:</summary>
+            Lim inn følgende i &lt;head&gt;-taggen:
+            <code>&lt;script src=&quot;https://unpkg.com/htmx.org@1.9.6&quot;
+                integrity=&quot;sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni&quot;
+                crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code>
+
+        </details>
+    </details>
+</details>
+
+<hr>
+
+<h3>Oppgave 2 - Smud navigasjon</h3>
+<p>Om du hopper mellom undersidene kan du av og til se glimt av "FOUC", <i>flash of unstyled content</i>. Dette er jo
+    ikke noe
+    man forventer av en nettside i 2023! Konsulter dokumentasjonen og se etter ett HTMX-attributt som kan hjelpe med
+    dette.</p>
+<details>
+    <summary>Hint 1:</summary>
+    Attributten du leter etter er <a target="_blank" href="https://htmx.org/attributes/hx-boost/">hx-boost</a>.
+
+    <details>
+        <summary>Hint 2:</summary>
+        hx-boost vil få linker og skjema (a-tagger og form-tagger) til å automatisk fungere på en moderne måte.
+
+        <details>
+            <summary>Hint 3:</summary>
+            hx-boost arves av alle barnelement under elementet det settes på.
+        </details>
+    </details>
+</details>
+
+<hr>
+
+<h3>Oppgave 3 - Automatiske sitater</h3>
+<p>Observer sitatet på "quote"-sida. Hver gang du laster sida får du (sannsynligvis) et nytt sitat. Vi ønsker
+    at det skal lastes inn nye sitat automatisk hvert 3. sekund. Løs dette med HTMX! </p>
+
+<details>
+    <summary>Hint 1:</summary>
+    Legg til attributter for å trigge innlasting, hente inn siden og velge ut hvilken del som skal byttes ut.
+
+    <details>
+        <summary>Hint 2:</summary>
+        hx-trigger, hx-get og hx-select er vennene dine :)
+
+        <details>
+            <summary>Hint 3:</summary>
+            <code>hx-trigger="every 3s" hx-get="/" hx-select="#quote"</code>
+        </details>
+    </details>
+</details>
+
+<hr>
+
+<h3>Oppgave 4 - Innsending av skjema</h3>
+<p>Legg merke til at når du fyller ut registreringsskjemaet blir du sendt videre til en side som bekrefter
+    registreringen. Dette er jo litt tungvint! Hva om vi kunne vise bekreftelsen på samme side som skjemaet? Det kan vi,
+    med HTMX!</p>
+<details>
+    <summary>Hint 1:</summary>
+    Når skjemaet sendes inn, hent den returnerte HTMLen og sett inn deler av den på en passende plass. Det er
+    <code>employee_registred.html</code>-malen som blir returnert.
+
+    <details>
+        <summary>Hint 2:</summary>
+        Med mindre du spesifiserer noe annet bruker HTMX
+        <code>action</code>- og
+        <code>method</code>-attributtene som allerede er definert på skjemaet.
+
+
+        <details>
+            <summary>Hint 3:</summary>
+            Bruk<code>hx-select</code> til å velge div'en som har<code>id="confirmation"</code> (obs: hx-select tar
+            CSS-selectorer!)
+        </details>
+    </details>
+</details>
+
+<hr>
+
+<h3>Oppgave 5 - Infiniscroll</h3>
+<p>Listen over ansatte viser kun de 20 første i lista, med en "mer" link nederst som henter neste side. Dette kan vi jo
+    gjøre bedre! Finn en måte å dynamiske hente inn neste del av tabellen etter hvert som man scroller nedover siden.
+</p>
+
+<details>
+    <summary>Hint 1:</summary>
+    Her trenger vi å finne ut av:
+
+    <ul>
+        <li>En trigger, og hvilket element denne skal ligge på</li>
+        <li>Hvordan GET'e URLen til neste side</li>
+        <li>Hvordan hente ut tabellen fra neste side, men ikke overskriftene</li>
+        <li>Hvordan plassere neste del av lista under den foregående.</li>
+    </ul>
+
+    <details>
+        <summary>Hint 2:</summary>
+        Du kan betinget rendre html i templaten med if-statements:
+        <pre style="display: block;">
+            {% raw %}
+            {% if 1===1 %}
+                &lt;tr class=&quot;foo&quot;&gt;
+            {% else %}
+                &lt;tr&gt;
+            {% endif %}
+            {% endraw %}
+        </code>
+
+        <p>For å sjekke om du er på siste element i en loop, bruk
+        <code>{% raw %}{% if loop.last%}{% endraw %}</code>
+        </p>
+        <details>
+            <summary>Hint 3:</summary>
+            <a href="https://htmx.org/examples/infinite-scroll/">Se eksempel her</a>
+        </details>
+    </details>
+</details>
+
+<hr>
+
+<h3>Oppgave 6 - Live søking</h3>
+<p>Om du søker i ansattlista blir du tatt til en ny side med søkeresultatene dine. Dette er greit nok, men det hadde jo
+    vert mye kulere om lista oppdaterte seg etter hvert som vi skriver! Finn en måte å dynamisk laste inn søkeresultatet
+    etter hvert som du skriver i søkefeltet ved hjelp av HTMX!</p>
+<details>
+    <summary>Hint 1:</summary>
+
+    <p>Query-parameteret <code>?q=</code> sendes med videre automatisk når vi søker (se i URL-baren når du har søkt).</p>
+    <p>
+    <code>hx-trigger="keyup changed"</code> vil trigge så snart vi skriver, men det er bedre om vi finner en måte å vente
+    litt til vi er ferdige å skrive, så vi ikke spammer backenden med hvert eneste tastetrykk (såkalt
+    <i>debouncing</i>)</p>
+
+    <details>
+        <summary>Hint 2:</summary>
+        <code>delay:0.3s</code> 
+        <details>
+            <summary>Hint 3:</summary>
+            <code>hx-trigger, hx-get, hx-select,</code> og <code> hx-target</code> burde få deg i mål.
+        </details>
+    </details>
+</details>
+
+<h3>Ekstraoppgave!</h3>
+<p>Finner du en måte å få antall resultater til å også oppdatere seg dynamisk?</p>
+<details>
+    <summary>Hint</summary>
+    Det vi ser etter her er en såkalt<i> <b>O</b>ut-<b>O</b>f-<b>B</b>and</i>-operasjon.
+</details>
+
+<hr>
+
+<h3>Oppgave 7 - Innlasting av redigeringsfelt</h3>
+<p>Når vi redigerer en ansatt blir vi tatt til et skjema på en egen side. En mer elegant løsning er å vise redigeringsfeltet i tabellraden når du trykker på linken. Legg til attributtene som må til for å få til dette.</p>
+<hr>
+<h3>Oppgave 8 - Sletting uten javascript</h3>
+<p>Sletting av ansatte er implementert med JavaScript! Dette fordi det å sende DELETE-requests med HTML ikke går an! Takk og pris for at det finnest bedre måter. Slett all javascriptkoden i <code>employees.html</code> og vis hvor enkelt sletting kan gjøres med HTMX!</p>
+
+<h4>Ekstraoppgave!</h4>
+Nederst i (den smått rotete) <code>static/styles.css</code> ser du at vi har lagt til en animasjon på <code>tr</code>-elementer med <code>htmx-swapping</code>-klassen. Denne klassen settes automatisk på alle elementer rett før de blir byttet ut av HTMX. Men siden slettingen går fort, forsvinner elementet før animasjonen rekker å vises. Finn en måte å forsinke fjerningen på like lenge som animasjonen er satt til (0.6 sek).
+
+<details><summary>Hint</summary>
+hx-swap
+</details>
+
+<hr>
+<h3>Bonus 1 - Dank memes (enkel)</h3>
+<a target="_blank" href="https://htmx.org/essays/#memes">Les memes.</a>
+<p>Essayene på toppen er også ganske bra, da.</p>
+
+<hr>
+<h3>Bonus 2 - Deploy til fly.io (litt avansert)</h3>
+<p>En nettside er bare nyttig om andre kan se den! Ved å følge <a target="_blank" href="https://fly.io/docs/languages-and-frameworks/python/#before-deployment">guiden til fly.io</a> fra og med "Before Deployment"-steget kan du enkelt publisere appen på nettet!</p>
+
 {% endblock %}
