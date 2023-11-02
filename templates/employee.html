@@ -4,7 +4,7 @@
 
 <h2>Edit employee</h2>
 
-<form action="{{ url_for('update_employee', id=employee.id) }}" method="POST">
+<form id="edit-row" action="{{ url_for('update_employee', id=employee.id) }}" method="POST">
     {{ form.hidden_tag() }}
     <table>
         <tr>
