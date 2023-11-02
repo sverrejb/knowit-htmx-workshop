@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Employees ({{ number_of_employees }})</h2>
+<h2>Employees <span id="counter">({{ number_of_employees }})</span></h2>
 <form action="/employees" method="GET">
     <input type="text" name="q" placeholder="Search employees by name" value="{{ query or '' }}">
     <button type="submit">Search</button>
 </form>
 
-
-<table>
+<table id="employee-table">
     <tr>
         <th>Name</th>
         <th>Year of birth</th>
