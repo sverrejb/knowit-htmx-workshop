@@ -99,12 +99,27 @@ def update_employee(id):
     return render_template_string('PageNotFound {{ errorCode }}', errorCode='404'), 404
 
 
-@app.route('/employees/<int:id>', methods=["POST", "DELETE"])
+@app.route('/employees/<int:id>', methods=["DELETE"])
 def delete_employee(id):
+    # TODO: refactor this horrible mess
+    employees = database
+    search_query = request.args.get('q', type=str)
+    if search_query:
+        employees = [employee for employee in employees if search_query.lower(
+        ) in employee['name'].lower()]
+
+    page = request.args.get('page', 1, type=int)
+    start = (page-1)*PAGE_SIZE
+    end = start + PAGE_SIZE
+
+    next_page = url_for('get_employees', q=search_query, page=page+1)
+    if end >= len(employees):
+        next_page = None
+
     for employee in database:
         if employee["id"] == id:
             database.remove(employee)
-            return ('', 200)
+            return render_template('employees.html', employees=employees[start:end], query=search_query, next_page=next_page, number_of_employees=len(employees))
     return ('', 500)
 
 
