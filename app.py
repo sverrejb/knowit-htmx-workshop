@@ -62,8 +62,7 @@ def get_employees():
     employees = database
     search_query = request.args.get('q', type=str)
     if search_query:
-        employees = [employee for employee in employees if search_query.lower(
-        ) in employee['name'].lower()]
+        employees = [employee for employee in employees if search_query.lower() in employee['name'].lower()]
 
     page = request.args.get('page', 1, type=int)
     start = (page-1)*PAGE_SIZE
